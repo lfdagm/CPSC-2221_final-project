@@ -12,7 +12,8 @@ require '../database/database.php';
 //Create array
 global $hotels;
 $hotels = [];
-
+if (isset($_POST["submit"])) {
+    //Connect to the database
 // Get the location from the form
 $hotel_name = $_POST["name"];
 
@@ -30,6 +31,9 @@ if ($result->num_rows > 0) {
         
     }
 } 
+
+}
+
 
 // Close the database connection
 $conn->close();
@@ -58,7 +62,7 @@ $conn->close();
                         <input type="text" class="form-control" id="name" name="name"
                             aria-describedby="lastnameHelp">
                     </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary" name="submit">Submit</button>
                 </form>
 
             </div>

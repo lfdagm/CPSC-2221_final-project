@@ -1,6 +1,61 @@
-<?php include '../components/head.php'; ?>
-<?php include '../components/navbar.php'; ?>
+<?php
+//  Display errors
+ini_set('display_errors', 1);
+error_reporting(E_ALL); 
 
+include '../components/head.php';
+include '../components/navbar.php';
+require '../database/database.php';
+
+
+$status = "";
+$customerList=[];
+
+
+
+
+if (isset($_POST["submit"])) {
+
+
+    //Get values
+    $firstName = $_POST["first-name"];
+    $lastName = $_POST["last-name"];
+    $gender = $_POST["gender"];
+
+
+
+    //construct the query
+    $query = "INSERT INTO Customer (FirstName, LastName, Gender) VALUES('$firstName','$lastName','$gender')";
+
+    //Insert into customer table
+    if ($conn->query($query) === TRUE) {
+        $status = "Customer added successfully";
+
+    } else {
+        $status = "Error creating customer" . $conn->error;
+    }
+    
+}
+
+//Query to display customer list     
+$selectQuery="SELECT Customer_ID, FirstName, LastName, Gender  FROM Customer";
+    
+$result = $conn->query($selectQuery);
+
+
+if ($result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+ 
+        $customerList[]=$row;
+
+        
+    }
+
+}
+$conn->close();
+
+
+?>
 
 
 <div id="layoutSidenav_content">
@@ -14,9 +69,35 @@
 
             <div class="card mb-4">
 
+                <?php
+                if ($status == "Customer added successfully") {
+                    echo '<div class="alert alert-success alert-dismissible fade show" role="alert" id="successCreate">' . $status;
+                    echo '<button type="button" class="btn-close" data-dismiss="alert" aria-label="Close" >
+                        </button>
+                    </div>';
+                } else {
+                    echo '<div class="alert alert-warning alert-dismissible fade show" role="alert" id="errorAlertCreate">' . $status;
+                    echo '<button type="button" class="btn-close" data-dismiss="alert" aria-label="Close" >
+                        
+                    </button>
+                </div>';
+                }
+                ?>
+                <script>
+                    $(document).ready(function () {
+                        $(".close").click(function () {
+                            $("#successAlertCreate").alert("close");
+                        });
+                    });
+                    $(document).ready(function () {
+                        $(".close").click(function () {
+                            $("#errorAlertCreate").alert("close");
+                        });
+                    });
+                </script>
 
 
-                <form class="m-3" action="processors/customer-process.php" method="post">
+                <form class="m-3" action="" method="post">
                     <div class="mb-3">
                         <label for="first-name" class="form-label">First Name</label>
                         <input type="text" class="form-control" id="first-name" name="first-name"
@@ -29,14 +110,10 @@
                             aria-describedby="nameHelp">
                     </div>
 
-                    <div class="mb-3">
-                        <label for="passport" class="form-label">Passport Number</label>
-                        <input type="text" class="form-control" id="passport" name="passport"
-                            aria-describedby="lastnameHelp">
-                    </div>
 
-                    <div class="d-flex justify-content-evenly mb-3">
-                        <div class="p-2 mb-3 flex-fill">Gender
+
+                    <div class="mb-3">
+                        <div class="p-2 mb-3">Gender
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="gender" id="gender-f" value="F">
                                 <label class="form-check-label" for="gender-f">
@@ -52,49 +129,68 @@
 
                         </div>
 
-                        <div class="p-2 mb-3 flex-fill">Veteran or Active Military Member
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="military" id="military" value="yes"
-                                    data-bs-toggle="collapse" data-bs-target=".collapseOne:not(.in)"
-                                    aria-expanded="false" aria-controls="military-id-section">
-
-                                <label class="form-check-label" for="military">
-                                    Yes
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="military" id="non-military"
-                                    value="no" data-bs-toggle="collapse" data-bs-target=".collapseTwo:not(.in)">
-                                <label class="form-check-label" for="non-military">
-                                    No
-                                </label>
-                            </div>
-                        </div>
-
-                        <div class="collapseOne collapse">
-                            <div id="military-id-section" class=" p-2 mb-3 flex-fill">
-                                <label for="military-id" class="form-label">Military ID</label>
-                                <input type="text" class="form-control" id="military-id" name="military-id">
-                            </div>
-
-                            <div class="collapseTwo collapse">
-                                <div id="loyalty" class=" p-2 mb-3 flex-fill">
-                                    <label for="loyalty" class="form-label">Loyalty status</label>
-                                    <input type="text" class="form-control" id="loyalty-status" name="loyalty-status">
-                                </div>
-
-                            </div>
-                        </div>
-
-
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" name="submit" class="btn btn-primary">Submit</button>
                 </form>
 
             </div>
 
 
         </div>
-    </main>
 
+        <div class="card mb-4">
+
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                Customer List
+            </div>
+
+            <div class="card-body">
+
+
+                <table id="datatablesSimple">
+                    <thead>
+                        <tr>
+                            <th>Costumer ID</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Gender</th>
+
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Costumer ID</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Gender</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <?php foreach ($customerList as $customer) { ?>
+                            <tr>
+
+                                <td>
+                                    <?php echo $customer["Customer_ID"] ?>
+                                </td>
+                                <td>
+                                    <?php echo $customer["FirstName"] ?>
+                                </td>
+                                <td>
+                                    <?php echo $customer["LastName"] ?>
+                                </td>
+                                <td>
+                                    <?php echo $customer["Gender"] ?>
+                                </td>
+
+                            </tr>
+
+                        <?php } ?>
+                    </tbody>
+                </table>
+            </div>
+
+
+        </div>
+    </main>
 
     <?php include '../components/footer.php'; ?>

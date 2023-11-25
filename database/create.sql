@@ -5,6 +5,17 @@ CREATE TABLE Customer (
     Gender CHAR(1)
 );
 
+CREATE TABLE TravelAgents_Assist (
+    AgentID INT PRIMARY KEY,
+    FirstName VARCHAR(30),
+    LastName VARCHAR(30),
+    Customer_ID INT NOT NULL,
+    FOREIGN KEY (Customer_ID) REFERENCES Customer(Customer_ID) 
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
+
+
 CREATE TABLE Passport (
     PassportNumber VARCHAR(10),
     Customer_ID INT,
@@ -22,6 +33,38 @@ CREATE TABLE Military (
         ON DELETE CASCADE 
         ON UPDATE CASCADE
 );
+
+CREATE TABLE LoyaltyStatusBenefits (
+    LoyaltyStatus VARCHAR(50),
+    LoyaltyBenefits VARCHAR(200),
+    PRIMARY KEY (LoyaltyStatus)
+);
+
+CREATE TABLE Non_Military (
+    Customer_ID INT PRIMARY KEY,
+    LoyaltyStatus VARCHAR(50), 
+    LoyaltyRegistrationDate DATE,
+    FOREIGN KEY (Customer_ID) REFERENCES Customer(Customer_ID)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+    FOREIGN KEY (LoyaltyStatus) REFERENCES LoyaltyStatusBenefits(LoyaltyStatus)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
+
+
+CREATE TABLE Supervises (
+    Employee_AgentID INT,
+    Supervisor_AgentID INT,
+    PRIMARY KEY (Employee_AgentID),
+    FOREIGN KEY (Employee_AgentID) REFERENCES TravelAgents_Assist(AgentID)
+        ON DELETE CASCADE 
+        ON UPDATE CASCADE,
+    FOREIGN KEY (Supervisor_AgentID) REFERENCES TravelAgents_Assist(AgentID)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
+
 
 Create Table Hotel(
     HotelID INT AUTO_INCREMENT Primary KEY,
@@ -67,7 +110,6 @@ CREATE TABLE Provide_Hotel (
     FOREIGN KEY (Hotel_ID) REFERENCES Hotel(HotelID) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-
 CREATE TABLE Destination (
     DestinationID INT,
     Reviews VARCHAR(255),
@@ -86,6 +128,77 @@ CREATE TABLE Trip_Package_Has_Destination (
         ON DELETE CASCADE
         ON UPDATE CASCADE,
     FOREIGN KEY(DestinationID) REFERENCES Destination(DestinationID)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
+
+CREATE TABLE Transportation (
+    TranspID INT,
+    CompanyName VARCHAR(20),
+    TicketType VARCHAR(20),
+    PRIMARY KEY(TranspID)
+);
+
+CREATE TABLE TripPackage_Provide_Hotel (
+    TripPackID INT,
+    Hotel_ID INT,
+    SpecialRequest VARCHAR(255),
+    PRIMARY KEY (TripPackID, Hotel_ID),
+    FOREIGN KEY (TripPackID) REFERENCES TripPackage (TripPackID)
+        ON DELETE CASCADE 
+        ON UPDATE CASCADE,
+    FOREIGN KEY (Hotel_ID) REFERENCES Hotel (HotelID)
+        ON DELETE CASCADE 
+        ON UPDATE CASCADE
+);
+
+CREATE TABLE Trip_Package_Includes_Transportation (
+    TripPackID INTEGER,
+    TranspID INTEGER,
+    PRIMARY KEY (TranspID, TripPackID),
+    FOREIGN KEY (TripPackID) REFERENCES TripPackage (TripPackID)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+    FOREIGN KEY (TranspID) REFERENCES Transportation (TranspID)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
+
+CREATE TABLE Trip_Package_Associate_Booking (
+    TripPackID INTEGER,
+    BookingID INTEGER,
+    PRIMARY KEY (TripPackID, BookingID),
+    FOREIGN KEY (TripPackID) REFERENCES TripPackage(TripPackID)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+    FOREIGN KEY (BookingID) REFERENCES Has_Booking(BookingID)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
+
+CREATE TABLE TravelAgent_That_Assists_Customer_Offers (
+    AgentID INTEGER,
+    CustomerID INTEGER,
+    TripPackID INTEGER,
+    PRIMARY KEY (AgentID, CustomerID, TripPackID),
+    FOREIGN KEY (AgentID) REFERENCES TravelAgents_Assist (AgentID)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+    FOREIGN KEY (CustomerID) REFERENCES Customer (Customer_ID)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+    FOREIGN KEY (TripPackID) REFERENCES TripPackage (TripPackID)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
+
+
+CREATE TABLE Hotel_Room_In_A_Hotel (
+    HotelID INT,
+    RNumber INT,
+    Type VARCHAR(20),
+    PRIMARY KEY (HotelID, RNumber),
+    FOREIGN KEY (HotelID) REFERENCES Hotel(HotelID)
         ON DELETE CASCADE
         ON UPDATE CASCADE
 );

@@ -29,7 +29,7 @@
                                 <th>First Name</th>
                                 <th>Last Name</th>
                                 <th>Gender</th>
-                                
+
                             </tr>
                         </thead>
                         <tfoot>
@@ -41,15 +41,23 @@
                             </tr>
                         </tfoot>
                         <tbody>
-                        <?php foreach ($customerList as $customer){ ?>
-                            <tr>
-                      
-                                <td><?php echo $customer["Customer_ID"]?></td> 
-                                <td><?php echo $customer["FirstName"]?></td> 
-                               <td><?php echo $customer["LastName"]?></td> 
-                                <td><?php echo $customer["Gender"]?></td>
-        
-                            </tr>
+                            <?php foreach ($customerList as $customer) { ?>
+                                <tr>
+
+                                    <td>
+                                        <?php echo $customer["Customer_ID"] ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $customer["FirstName"] ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $customer["LastName"] ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $customer["Gender"] ?>
+                                    </td>
+
+                                </tr>
 
                             <?php } ?>
                         </tbody>
@@ -58,7 +66,7 @@
 
 
             </div>
-            
+
 
         </div>
 
@@ -67,6 +75,5 @@
 
 
 
-    
+
     <?php include '../components/footer.php'; ?>
-    

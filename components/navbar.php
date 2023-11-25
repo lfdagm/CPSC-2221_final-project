@@ -15,7 +15,7 @@
             </div>
         </form>
         <!-- Navbar-->
-        <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+        <!-- <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
                     aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
@@ -28,7 +28,7 @@
                     <li><a class="dropdown-item" href="#!">Logout</a></li>
                 </ul>
             </li>
-        </ul>
+        </ul> -->
     </nav>
     <!-- Sidebar navigation -->
     <div id="layoutSidenav">
@@ -37,10 +37,10 @@
                 <div class="sb-sidenav-menu">
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading">Core</div>
-                        <a class="nav-link" href="index.html">
+                        <!-- <a class="nav-link" href="index.html">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Dashboard
-                        </a>
+                        </a> -->
                         <div class="sb-sidenav-menu-heading">Interface</div>
 
                         <!-- Pages: Customer -->
@@ -53,53 +53,32 @@
                         <div class="collapse" id="collapseCustomer" aria-labelledby="headingTwo"
                             data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                                    data-bs-target="#pagesCollapseCreateCust" aria-expanded="false"
-                                    aria-controls="pagesCollapseCreateCust">
-                                    Customer Administration
-                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                </a>
-                                <div class="collapse" id="pagesCollapseCreateCust" aria-labelledby="headingOne"
+                               
+                                <div id="pagesCustomerQueries" aria-labelledby="headingOne"
                                     data-bs-parent="#sidenavAccordionPages">
                                     <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link" href="../pages/create-customer.php">Create a new customer</a>
-                                        <!-- <a class="nav-link" href="#">Update customer</a>
-                                        <a class="nav-link" href="#">Delete customer</a> -->
-                                    </nav>
-                                </div>
-                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                                    data-bs-target="#pagesCustomerQueries" aria-expanded="false"
-                                    aria-controls="pagesCustomerQueries">
-                                    Customer Queries
-                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                </a>
-                                <div class="collapse" id="pagesCustomerQueries" aria-labelledby="headingOne"
-                                    data-bs-parent="#sidenavAccordionPages">
-                                    <nav class="sb-sidenav-menu-nested nav">
+                                        <a class="nav-link" href="../pages/create-customer.php">Create a new
+                                            customer</a>
+                                            <a class="nav-link" href="../pages/delete-customer.php">Delete a customer</a>
                                         <a class="nav-link" href="../pages/customer-list.php">Customer List </a>
-                                        <!-- <a class="nav-link" href="404.html">404 Page</a>
-                                        <a class="nav-link" href="500.html">500 Page</a> -->
+                                        <a class="nav-link" href="../pages/travel-agent-assist-all-customer.php">Travel agents that assists all customers </a>
+                                        <a class="nav-link" href="../pages/highest-paid-by-customer.php">Customer with Highest Amount Paid</a>
+
                                     </nav>
                                 </div>
                             </nav>
                         </div>
 
                         <!-- Pages: Bookings -->
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                        <!-- <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
                             data-bs-target="#collapseBookings" aria-expanded="false" aria-controls="collapseBookings">
                             <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                             Bookings
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
+                        </a> -->
                         <!-- <div class="collapse" id="collapseBookings" aria-labelledby="headingTwo"
                             data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                                    data-bs-target="#pagesCollapseAuth" aria-expanded="false"
-                                    aria-controls="pagesCollapseAuth">
-                                    Authentication
-                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                </a>
+                            
                                 <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne"
                                     data-bs-parent="#sidenavAccordionPages">
                                     <nav class="sb-sidenav-menu-nested nav">
@@ -120,26 +99,20 @@
                             Destinations
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
-                        <!-- <div class="collapse" id="collapseDestinations" aria-labelledby="headingTwo"
+                        <div class="collapse" id="collapseDestinations" aria-labelledby="headingTwo"
                             data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                                    data-bs-target="#pagesCollapseAuth" aria-expanded="false"
-                                    aria-controls="pagesCollapseAuth">
-                                    Authentication
-                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                </a>
-                                <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne"
+                            
+                                
+                                <div id="pagesCollapseAuth" aria-labelledby="headingOne"
                                     data-bs-parent="#sidenavAccordionPages">
                                     <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link" href="login.html">Login</a>
-                                        <a class="nav-link" href="register.html">Register</a>
-                                        <a class="nav-link" href="password.html">Forgot Password</a>
+                                        <a class="nav-link" href="../pages/destination-information.php">Destination Information</a>
+                                        
                                     </nav>
                                 </div>
 
-                            </nav>
-                        </div> -->
+                            
+                        </div>
 
                         <!-- Pages: TripPackages -->
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -151,63 +124,48 @@
                         </a>
                         <div class="collapse" id="collapseTripPackages" aria-labelledby="headingTwo"
                             data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                                    data-bs-target="#pagesCollapseAuth" aria-expanded="false"
-                                    aria-controls="pagesCollapseAuth">
-                                    Trip Package Administration
-                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                </a>
-                                <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne"
-                                    data-bs-parent="#sidenavAccordionPages">
-                                    <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link" href="../pages/create-trippackage.php">Create a Trip Package</a>
-                                        <!-- <a class="nav-link" href="register.html">Register</a>
-                                        <a class="nav-link" href="password.html">Forgot Password</a> -->
-                                    </nav>
-                                </div>
-                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                                    data-bs-target="#pagesCustomerQueries" aria-expanded="false"
-                                    aria-controls="pagesCustomerQueries">
-                                    Trip Package Queries
-                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                </a>
-                                <div class="collapse" id="pagesCustomerQueries" aria-labelledby="headingOne"
-                                    data-bs-parent="#sidenavAccordionPages">
-                                    <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link" href="../pages/tripPackage-search.php">Trip Package Search </a>
-                                        <!-- <a class="nav-link" href="404.html">404 Page</a>
-                                        <a class="nav-link" href="500.html">500 Page</a> -->
-                                    </nav>
-                                </div>
+                            
                                 
+                
+                                <div  id="pagesCustomerQueries" aria-labelledby="headingOne"
+                                    data-bs-parent="#sidenavAccordionPages">
+                                    <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="../pages/create-trippackage.php">Create a Trip
+                                            Package</a>
+                                        <a class="nav-link" href="../pages/tripPackage-search.php">Trip Package Search
+                                        </a>
+                                        <a class="nav-link" href="../pages/update-trip-package.php">Update Trip Package
+                                        </a>
+                                       
+                                    </nav>
+                                </div>
 
-                            </nav>
+
+                            
                         </div>
 
 
-                        <!-- Pages: Partner Hotels -->
+                        <!-- Pages: Hotels -->
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
                             data-bs-target="#collapseHotels" aria-expanded="false" aria-controls="collapseHotels">
                             <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                            Partner Hotels
+                            Hotels
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
                         <div class="collapse" id="collapseHotels" aria-labelledby="headingTwo"
                             data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                                    data-bs-target="#pagesCollapseAuth" aria-expanded="false"
-                                    aria-controls="pagesCollapseAuth">
-                                   Hotel Related Queries
-                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                </a>
-                                <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne"
+
+                    
+                                <div id="pagesCollapseAuth" aria-labelledby="headingOne"
                                     data-bs-parent="#sidenavAccordionPages">
                                     <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link" href="../pages/search-by-hotelName.php">Search by Hotel Name</a>
-                                        <!-- <a class="nav-link" href="register.html">Register</a>
-                                        <a class="nav-link" href="password.html">Forgot Password</a> -->
+                                        <a class="nav-link" href="../pages/search-by-hotelName.php">Search by Hotel
+                                            Name</a>
+                                            <a class="nav-link" href="../pages/max-hotel-rating.php">Highest Rated Hotel</a>
+                                            <a class="nav-link" href="../pages/min-hotel-rating.php">Lowest Rated Hotel</a>
+                                            
+                                
                                     </nav>
                                 </div>
 
@@ -215,13 +173,13 @@
                         </div>
 
                         <!-- Pages: Transportation -->
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                        <!-- <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
                             data-bs-target="#collapseTransportation" aria-expanded="false"
                             aria-controls="collapseTransportation">
                             <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                             Transportation
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
+                        </a> -->
                         <!-- <div class="collapse" id="collapseTransportation" aria-labelledby="headingTwo"
                             data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
@@ -244,12 +202,12 @@
                         </div> -->
 
                         <!-- Pages: Staff -->
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseStaff"
+                        <!-- <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseStaff"
                             aria-expanded="false" aria-controls="collapseStaff">
                             <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                             Staff
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
+                        </a> -->
                         <!-- <div class="collapse" id="collapseStaff" aria-labelledby="headingTwo"
                             data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
@@ -285,7 +243,7 @@
                 </div>
                 <div class="sb-sidenav-footer">
                     <div class="small">Logged in as:</div>
-                    Start Bootstrap
+                    User
                 </div>
             </nav>
         </div>

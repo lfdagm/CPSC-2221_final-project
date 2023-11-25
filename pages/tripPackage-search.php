@@ -9,31 +9,34 @@ error_reporting(E_ALL);
 // Connect to the database
 require_once '../database/database.php';
 
-
-
-// Get the departure date from the form
-$departure = $_POST["departure-date"];
-
-//
-global $tripPackageSearch;
 $tripPackageSearch = [];
+// $departure;
 
-// Construct the query to retrieve trip packages and their associated destinations
-$query = "SELECT TripPackage.*, Destination.Reviews, Destination.Country, Destination.City, Destination.LocationName
+
+if (isset($_POST["submit"])) {
+    // Get the departure date from the form
+    $departure = $_POST["departure-date"];
+
+
+
+    // Construct the query to retrieve trip packages and their associated destinations
+    $query = "SELECT TripPackage.*, Destination.Reviews, Destination.Country, Destination.City, Destination.LocationName
           FROM TripPackage
           JOIN Trip_Package_Has_Destination ON TripPackage.TripPackID = Trip_Package_Has_Destination.TripPackID
           JOIN Destination ON Trip_Package_Has_Destination.DestinationID = Destination.DestinationID
           WHERE TripPackage.DepartureDate = '$departure'";
 
-// Execute the query
-$result = $conn->query($query);
 
-// Display the results
-if ($result->num_rows > 0) {
-    echo "<h2>Search Results</h2>";
-    while ($row = $result->fetch_assoc()) {
-        $tripPackageSearch[] = $row;
+    // Execute the query
+    $result = $conn->query($query);
 
+    // Display the results
+    if ($result->num_rows > 0) {
+        
+        while ($row = $result->fetch_assoc()) {
+            $tripPackageSearch[] = $row;
+
+        }
     }
 }
 
@@ -58,26 +61,43 @@ $conn->close();
             <div class="card mb-4">
                 <form class="m-3" action="tripPackage-search.php" method="post">
                     <div class="mb-3">
-                        <label for="departure-date" class="form-label">Search by departure date</label>
-                        <select class="form-select" id="departure-date" name="departure-date"
-                            aria-describedby="lastnameHelp">
-                            <?php
-                            for ($i = 1; $i <= 100; $i++) {
-                                $date = date('Y-m-d', strtotime("+" . $i . " days"));
-                                $formattedDate = date('F d, Y', strtotime("+" . $i . " days"));
-                                echo "<option value='$date'>$formattedDate</option>";
-                            }
-                            ?>
-                        </select>
+                
+                        <label>Departure date </label>
+                        <div id="datepicker" class="input-group date" data-date-format="yyyy-mm-dd">
+                            <input class="form-control position-relative" type="text" name="departure-date" id="departure-date" readonly />
+                            <span class="input-group-addon">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                            </span>
+                        </div>
+
+                        <script>
+                            $(function () {
+                                $("#datepicker").datepicker({
+                                    autoclose: true,
+                                    todayHighlight: true,
+                                }).datepicker('update', new Date());
+                            }); 
+                        </script>
+                        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+                            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+                            crossorigin="anonymous">
+                            </script>
+                        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+                            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+                            crossorigin="anonymous">
+                            </script>
+                        <script
+                            src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js">
+                            </script>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary" name="submit">Submit</button>
                 </form>
             </div>
             <div class="card mb-4">
 
                 <div class="card-header">
                     <i class="fas fa-table me-1"></i>
-                    List results
+                    List results for departure date <?php if (isset($_POST["submit"])) echo $departure ;?>
                 </div>
                 <div class="card-body">
 
